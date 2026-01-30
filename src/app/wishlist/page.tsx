@@ -142,7 +142,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background-gray">
-        <Header title="Wunschliste" showBack showSettings />
+        <Header title="Wunschliste" showSettings />
         <div className="flex items-center justify-center p-8">
           <div className="animate-pulse text-text-secondary">Lädt...</div>
         </div>
@@ -153,7 +153,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
   if (error) {
     return (
       <div className="min-h-screen bg-background-gray">
-        <Header title="Wunschliste" showBack showSettings />
+        <Header title="Wunschliste" showSettings />
         <div className="p-4">
           <div className="bg-red-50 text-red-600 p-4 rounded-card">
             {error}
@@ -170,7 +170,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
 
   return (
     <div className="min-h-screen bg-background-gray">
-      <Header title="Wunschliste" showBack showSettings />
+      <Header title="Wunschliste" showSettings />
 
       <div className="p-4 space-y-6 animate-slide-in">
         {isEmpty && (

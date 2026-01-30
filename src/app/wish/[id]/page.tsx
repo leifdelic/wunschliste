@@ -159,7 +159,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white">
-        <Header title="" showBack backHref="/wishlist" />
+        <Header title="Wunsch" showBack backHref="/wishlist" />
         <div className="flex items-center justify-center p-8">
           <div className="animate-pulse text-text-secondary">Lädt...</div>
         </div>
@@ -171,7 +171,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
 
   return (
     <div className="min-h-screen bg-white">
-      <Header title="" showBack backHref="/wishlist" />
+      <Header title="Wunsch" showBack backHref="/wishlist" />
 
       <div className="p-6 animate-slide-in">
         {/* Title and Info */}

@@ -7,7 +7,7 @@ export default function Home() {
       {/* Fullscreen Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/family-illustration.png"
+          src="/family-illustration.jpg"
           alt="Familie Illustration"
           fill
           className="object-cover"

@@ -7,11 +7,11 @@ export default function Home() {
       {/* Fullscreen Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/family-illustration.jpg"
+          src="/family-illustration.png"
           alt="Familie Illustration"
           fill
           className="object-cover"
-          style={{ objectPosition: "center -100px" }}
+          style={{ objectPosition: "center top" }}
           priority
           sizes="100vw"
         />
@@ -30,8 +30,8 @@ export default function Home() {
         {/* Text and Buttons */}
         <div className="px-6 pb-12 space-y-8">
           <div className="text-left">
-            <p className="text-foreground font-black" style={{ fontSize: "39px", lineHeight: 1.1, textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}>Dinge vergehen.</p>
-            <p className="text-foreground font-black" style={{ fontSize: "39px", lineHeight: 1.1, textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}>Erlebnisse bleiben.</p>
+            <p className="text-foreground font-black" style={{ fontSize: "34px", lineHeight: 1.1, textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}>Sachen vergehen.</p>
+            <p className="text-foreground font-black" style={{ fontSize: "34px", lineHeight: 1.1, textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}>Erlebnisse bleiben.</p>
           </div>
 
           <div className="space-y-3">

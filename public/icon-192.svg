@@ -1,4 +1,13 @@
 <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="192" height="192" rx="40" fill="#1A1A1A"/>
-  <text x="96" y="120" text-anchor="middle" fill="white" font-family="system-ui" font-size="72" font-weight="bold">W</text>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e63946"/>
+      <stop offset="100%" style="stop-color:#c1121f"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="40" fill="url(#bg)"/>
+  <!-- Star/Wish symbol -->
+  <path d="M96 40L108.5 77.5H148L116 101.5L128 140L96 116L64 140L76 101.5L44 77.5H83.5L96 40Z" fill="white" fill-opacity="0.95"/>
+  <!-- Small heart inside star -->
+  <path d="M96 95C96 95 84 85 84 78C84 73 88 70 93 70C95 70 96 71 96 71C96 71 97 70 99 70C104 70 108 73 108 78C108 85 96 95 96 95Z" fill="#e63946"/>
 </svg>

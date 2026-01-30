@@ -137,18 +137,25 @@ export default function WishCard({
         {wish.status === "waiting" && (
           <>
             <button
+              onClick={(e) => handleAction(e, onApprove)}
+              className="btn-secondary-small flex-1"
+              disabled={isLoading}
+            >
+              Freigeben
+            </button>
+            <button
               onClick={(e) => handleAction(e, onObjection)}
-              className="btn-secondary flex-1 text-caption"
+              className="btn-secondary-small flex-1"
               disabled={isLoading}
             >
               Einspruch
             </button>
             <button
               onClick={(e) => handleAction(e, onKiCheck)}
-              className="btn-secondary flex-1 text-caption"
+              className="btn-secondary-small flex-1"
               disabled={isLoading}
             >
-              KI-Check
+              KI
             </button>
           </>
         )}
@@ -157,14 +164,14 @@ export default function WishCard({
           <>
             <button
               onClick={(e) => handleAction(e, onApprove)}
-              className="btn-secondary flex-1 text-caption"
+              className="btn-secondary-small flex-1"
               disabled={isLoading}
             >
               Freigeben
             </button>
             <button
               onClick={(e) => handleAction(e, onDiscard)}
-              className="btn-secondary flex-1 text-caption text-accent"
+              className="btn-secondary-small flex-1 text-accent"
               disabled={isLoading}
             >
               Verwerfen
@@ -176,14 +183,14 @@ export default function WishCard({
           <>
             <button
               onClick={(e) => handleAction(e, onPurchased)}
-              className="btn-secondary flex-1 text-caption"
+              className="btn-secondary-small flex-1"
               disabled={isLoading}
             >
               Gekauft
             </button>
             <button
               onClick={(e) => handleAction(e, onDiscard)}
-              className="btn-secondary flex-1 text-caption text-accent"
+              className="btn-secondary-small flex-1 text-accent"
               disabled={isLoading}
             >
               Doch nicht

@@ -193,6 +193,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
                   key={wish.id}
                   wish={wish}
                   onObjection={handleObjection}
+                  onApprove={(w) => handleStatusUpdate(w, "approved")}
                   onKiCheck={handleKiCheck}
                   onClick={handleCardClick}
                 />

@@ -42,13 +42,30 @@ export default function NewWishPage() {
   };
 
   const uploadImages = async (): Promise<Array<{ url: string }>> => {
-    // For now, we'll skip image upload as it requires additional setup
-    // In production, you'd upload to a service like Cloudinary or S3
-    // and return the URLs
+    if (images.length === 0) return [];
 
-    // Placeholder: Return empty array
-    // TODO: Implement image upload when storage is configured
-    return [];
+    try {
+      const formData = new FormData();
+      images.forEach((file) => {
+        formData.append("files", file);
+      });
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        console.error("Image upload failed, continuing without images");
+        return [];
+      }
+
+      const data = await response.json();
+      return data.urls;
+    } catch (error) {
+      console.error("Image upload error:", error);
+      return []; // Continue without images if upload fails
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,6 +95,21 @@ export default function NewWishPage() {
       });
 
       if (!response.ok) throw new Error("Failed to create wish");
+
+      // Delete images from Vercel Blob after 15 seconds (give Airtable time to download)
+      if (uploadedImageUrls.length > 0) {
+        setTimeout(async () => {
+          try {
+            await fetch("/api/upload", {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ urls: uploadedImageUrls.map(u => u.url) }),
+            });
+          } catch (e) {
+            console.error("Failed to delete temporary images:", e);
+          }
+        }, 15000);
+      }
 
       router.push("/wishlist");
     } catch (err) {
@@ -162,11 +194,17 @@ export default function NewWishPage() {
             Link (optional)
           </label>
           <input
-            type="url"
+            type="text"
             value={link}
             onChange={(e) => setLink(e.target.value)}
+            onBlur={(e) => {
+              const value = e.target.value.trim();
+              if (value && !value.startsWith("http://") && !value.startsWith("https://")) {
+                setLink("https://" + value);
+              }
+            }}
             className="input-field"
-            placeholder="https://..."
+            placeholder="google.com oder https://..."
           />
         </div>
 

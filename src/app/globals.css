@@ -35,14 +35,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Safe area padding for PWA */
+/* Safe area padding for PWA - applied by default */
 @supports (padding-top: env(safe-area-inset-top)) {
   body {
     padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
+}
+
+/* Safe area utilities for PWA */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-area-x {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Hero page - extend behind safe area */
+.hero-fullscreen {
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  margin-left: calc(-1 * env(safe-area-inset-left, 0px));
+  margin-right: calc(-1 * env(safe-area-inset-right, 0px));
+  padding-top: 0;
 }
 
 /* Custom scrollbar */
@@ -77,6 +98,14 @@ body {
     @apply bg-input-bg text-foreground rounded-card py-3 px-4 font-medium text-center transition-colors hover:bg-gray-200;
   }
 
+  .btn-primary-small {
+    @apply bg-primary text-white rounded-lg py-2 px-4 text-sm font-medium text-center transition-opacity hover:opacity-90 active:opacity-80;
+  }
+
+  .btn-secondary-small {
+    @apply bg-input-bg text-foreground rounded-lg py-2 px-4 text-sm font-medium text-center transition-colors hover:bg-gray-200;
+  }
+
   .btn-text {
     @apply text-link underline;
   }
@@ -104,4 +133,30 @@ body {
 
 .animate-slide-in {
   animation: slideIn 0.3s ease-out;
+}
+
+/* Fade slide in for images */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in for fullscreen */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
 }

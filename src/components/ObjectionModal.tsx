@@ -42,55 +42,60 @@ export default function ObjectionModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50">
-      <div className="bg-white w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 animate-slide-in">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-headline">Einspruch</h2>
-          <button
-            onClick={onClose}
-            className="p-2 -mr-2 hover:bg-background-gray rounded-full transition-colors"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+    <div
+      className="fixed inset-0 bg-black/50 z-50 overflow-y-auto"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="min-h-full flex items-start justify-center p-4 pt-20">
+        <div className="bg-white w-full max-w-md rounded-2xl p-6 animate-slide-in safe-area-bottom">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-headline">Einspruch</h2>
+            <button
+              onClick={onClose}
+              className="p-2 -mr-2 hover:bg-background-gray rounded-full transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <p className="text-body text-text-secondary mb-4">
+            {wish.title} • {formatPrice(wish.price)}
+          </p>
+
+          <form onSubmit={handleSubmit}>
+            <label className="block text-caption text-text-secondary mb-2">
+              Warum? (Pflichtfeld)
+            </label>
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className="input-field min-h-[100px] resize-none mb-4"
+              placeholder="Lass uns am Sonntag darüber reden..."
+              required
+              autoFocus
+            />
+
+            <button
+              type="submit"
+              disabled={!comment.trim() || isSubmitting}
+              className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Wird gesendet..." : "Einspruch senden"}
+            </button>
+          </form>
         </div>
-
-        <p className="text-body text-text-secondary mb-4">
-          {wish.title} • {formatPrice(wish.price)}
-        </p>
-
-        <form onSubmit={handleSubmit}>
-          <label className="block text-caption text-text-secondary mb-2">
-            Warum? (Pflichtfeld)
-          </label>
-          <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="input-field min-h-[100px] resize-none mb-4"
-            placeholder="Lass uns am Sonntag darüber reden..."
-            required
-            autoFocus
-          />
-
-          <button
-            type="submit"
-            disabled={!comment.trim() || isSubmitting}
-            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? "Wird gesendet..." : "Einspruch senden"}
-          </button>
-        </form>
       </div>
     </div>
   );

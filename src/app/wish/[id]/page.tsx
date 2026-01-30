@@ -1,18 +1,15 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useParams } from "next/navigation";
 import Header from "@/components/Header";
 import ImageGallery from "@/components/ImageGallery";
 import ObjectionModal from "@/components/ObjectionModal";
 import { Wish, Person, getRemainingWaitDays, getRemainingBuyDays } from "@/types/wish";
 
-export default function WishDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function WishDetailPage() {
+  const params = useParams();
+  const id = params.id as string;
   const router = useRouter();
 
   const [wish, setWish] = useState<Wish | null>(null);
@@ -178,7 +175,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
 
       <div className="p-6 animate-slide-in">
         {/* Title and Info */}
-        <div className="mb-6">
+        <div className="mb-4">
           <h1 className="text-headline">{wish.title}</h1>
           <p className="text-body text-text-secondary mt-1">
             {formatPrice(wish.price)} • von {wish.createdBy}
@@ -186,10 +183,71 @@ Begründe dein Urteil in 2-3 Sätzen.`;
           <p className="text-body text-text-secondary">{getStatusText()}</p>
         </div>
 
+        {/* Action Buttons - über den Bildern */}
+        <div className="mb-4">
+          {wish.status === "waiting" && (
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowObjectionModal(true)}
+                className="btn-secondary-small flex-1"
+              >
+                Einspruch
+              </button>
+              <button onClick={handleKiCheck} className="btn-secondary-small flex-1">
+                KI-Check
+              </button>
+            </div>
+          )}
+
+          {wish.status === "objected" && (
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleStatusUpdate("approved")}
+                className="btn-primary-small flex-1"
+              >
+                Freigeben
+              </button>
+              <button
+                onClick={() => handleStatusUpdate("discarded")}
+                className="btn-secondary-small text-accent flex-1"
+              >
+                Verwerfen
+              </button>
+            </div>
+          )}
+
+          {wish.status === "approved" && (
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleStatusUpdate("purchased")}
+                className="btn-primary-small flex-1"
+              >
+                Gekauft
+              </button>
+              <button
+                onClick={() => handleStatusUpdate("discarded")}
+                className="btn-secondary-small text-accent flex-1"
+              >
+                Doch nicht
+              </button>
+            </div>
+          )}
+        </div>
+
         {/* Images */}
         {wish.images && wish.images.length > 0 && (
           <div className="mb-6">
             <ImageGallery images={wish.images} />
+          </div>
+        )}
+
+        {/* Objection Comment */}
+        {wish.status === "objected" && wish.objectionComment && (
+          <div className="mb-6 bg-background-gray rounded-card p-4">
+            <h3 className="text-caption text-text-secondary mb-1">
+              Einspruch von {wish.objectedBy}
+            </h3>
+            <p className="text-body">&quot;{wish.objectionComment}&quot;</p>
           </div>
         )}
 
@@ -207,67 +265,6 @@ Begründe dein Urteil in 2-3 Sätzen.`;
             </a>
           </div>
         )}
-
-        {/* Objection Comment */}
-        {wish.status === "objected" && wish.objectionComment && (
-          <div className="mb-6 bg-background-gray rounded-card p-4">
-            <h3 className="text-caption text-text-secondary mb-1">
-              Einspruch von {wish.objectedBy}
-            </h3>
-            <p className="text-body">&quot;{wish.objectionComment}&quot;</p>
-          </div>
-        )}
-
-        {/* Action Buttons */}
-        <div className="space-y-3 mt-8">
-          {wish.status === "waiting" && (
-            <>
-              <button
-                onClick={() => setShowObjectionModal(true)}
-                className="btn-secondary"
-              >
-                Einspruch
-              </button>
-              <button onClick={handleKiCheck} className="btn-secondary">
-                KI-Check
-              </button>
-            </>
-          )}
-
-          {wish.status === "objected" && (
-            <>
-              <button
-                onClick={() => handleStatusUpdate("approved")}
-                className="btn-primary"
-              >
-                Freigeben
-              </button>
-              <button
-                onClick={() => handleStatusUpdate("discarded")}
-                className="btn-secondary text-accent"
-              >
-                Verwerfen
-              </button>
-            </>
-          )}
-
-          {wish.status === "approved" && (
-            <>
-              <button
-                onClick={() => handleStatusUpdate("purchased")}
-                className="btn-primary"
-              >
-                Gekauft
-              </button>
-              <button
-                onClick={() => handleStatusUpdate("discarded")}
-                className="btn-secondary text-accent"
-              >
-                Doch nicht
-              </button>
-            </>
-          )}
-        </div>
       </div>
 
       {showObjectionModal && (

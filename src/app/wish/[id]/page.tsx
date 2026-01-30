@@ -248,20 +248,20 @@ Begründe dein Urteil in 2-3 Sätzen.`;
           </div>
         )}
 
-        {/* Images */}
-        {wish.images && wish.images.length > 0 && (
-          <div className="mb-6">
-            <ImageGallery images={wish.images} />
-          </div>
-        )}
-
         {/* Objection Comment */}
         {wish.status === "objected" && wish.objectionComment && (
-          <div className="mb-6 bg-background-gray rounded-card p-4">
+          <div className="mb-4 bg-background-gray rounded-card p-4">
             <h3 className="text-caption text-text-secondary mb-1">
               Einspruch von {wish.objectedBy}
             </h3>
             <p className="text-body">&quot;{wish.objectionComment}&quot;</p>
+          </div>
+        )}
+
+        {/* Images */}
+        {wish.images && wish.images.length > 0 && (
+          <div className="mb-6">
+            <ImageGallery images={wish.images} />
           </div>
         )}
       </div>

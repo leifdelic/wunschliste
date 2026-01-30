@@ -19,8 +19,8 @@ export default function Header({
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 bg-white border-b border-border z-40 safe-area-top">
-      <div className="flex items-center justify-between h-14 px-4 safe-area-x">
+    <header className="sticky top-0 bg-white border-b border-border z-40">
+      <div className="flex items-center justify-between h-14 px-4">
         <div className="w-10">
           {showBack && (
             <Link

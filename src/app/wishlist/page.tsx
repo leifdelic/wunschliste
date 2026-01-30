@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Header from "@/components/Header";
 import WishCard from "@/components/WishCard";
 import ObjectionModal from "@/components/ObjectionModal";
@@ -236,6 +237,16 @@ Begründe dein Urteil in 2-3 Sätzen.`;
           </section>
         )}
       </div>
+
+      {/* Floating Action Button */}
+      <Link
+        href="/new"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-800 active:scale-95 transition-all z-50"
+      >
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        </svg>
+      </Link>
 
       {selectedWish && (
         <ObjectionModal

@@ -183,7 +183,7 @@ Begründe dein Urteil in 2-3 Sätzen.`;
           <p className="text-body text-text-secondary">{getStatusText()}</p>
         </div>
 
-        {/* Action Buttons - über den Bildern */}
+        {/* Action Buttons */}
         <div className="mb-4">
           {wish.status === "waiting" && (
             <div className="flex gap-2">
@@ -234,6 +234,20 @@ Begründe dein Urteil in 2-3 Sätzen.`;
           )}
         </div>
 
+        {/* Link */}
+        {wish.link && (
+          <div className="mb-4">
+            <a
+              href={wish.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link text-body break-all"
+            >
+              {wish.link}
+            </a>
+          </div>
+        )}
+
         {/* Images */}
         {wish.images && wish.images.length > 0 && (
           <div className="mb-6">
@@ -248,21 +262,6 @@ Begründe dein Urteil in 2-3 Sätzen.`;
               Einspruch von {wish.objectedBy}
             </h3>
             <p className="text-body">&quot;{wish.objectionComment}&quot;</p>
-          </div>
-        )}
-
-        {/* Link */}
-        {wish.link && (
-          <div className="mb-6">
-            <h3 className="text-caption text-text-secondary mb-1">Link</h3>
-            <a
-              href={wish.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-link text-body break-all"
-            >
-              {wish.link}
-            </a>
           </div>
         )}
       </div>
